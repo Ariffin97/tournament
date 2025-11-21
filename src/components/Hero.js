@@ -476,8 +476,7 @@ const Hero = () => {
                 <h3>Each registration will receive:</h3>
                 <ul>
                   <li>1 X Tournament T-Shirt</li>
-                  <li>Official DUPR Match Rating<br /><span>(All matches will be recorded in the DUPR System)</span></li>
-                  <li>Malaysia Players Ranking</li>
+                  <li>Malaysia Players Ranking Point</li>
                 </ul>
               </div>
             </motion.div>
