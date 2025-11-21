@@ -476,7 +476,7 @@ const Hero = () => {
                 <h3>Each registration will receive:</h3>
                 <ul>
                   <li>1 X Tournament T-Shirt</li>
-                  <li>Malaysia Players Ranking Point</li>
+                  <li>Malaysia Players Ranking Points</li>
                 </ul>
               </div>
             </motion.div>
