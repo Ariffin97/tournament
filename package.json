@@ -2,7 +2,7 @@
   "name": "tournament-website",
   "version": "0.1.0",
   "private": true,
-  "homepage": "/gatorade-2025",
+  "homepage": ".",
   "dependencies": {
     "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^6.8.0",
