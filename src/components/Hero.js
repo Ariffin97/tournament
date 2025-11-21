@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Trophy, Menu, X } from 'lucide-react';
+import { Trophy, Menu, X, MapPin, Calendar } from 'lucide-react';
 
 const Hero = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
   const [activeCategory, setActiveCategory] = useState('junior');
+  const [showNotice, setShowNotice] = useState(true);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -73,6 +74,12 @@ const Hero = () => {
         >
           Prize
         </a>
+        <a
+          href="#"
+          onClick={(e) => { e.preventDefault(); setShowNotice(true); }}
+        >
+          Important
+        </a>
       </motion.nav>
 
       {/* Hero Content */}
@@ -102,8 +109,9 @@ const Hero = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.5 }}
               >
-                <p><strong>Location:</strong> Pickle Depot, Sentul KL</p>
-                <p><strong>Date:</strong> 5-8 December 2025</p>
+                <p><MapPin size={18} className="info-icon" /> Pickle Depot, Sentul KL</p>
+                <p><Calendar size={18} className="info-icon" /> 5-8 December 2025</p>
+                <p className="hero-quote"><strong><em>"WHERE MALAYSIA'S BEST COMPETE"</em></strong></p>
               </motion.div>
 
               <motion.div
@@ -601,6 +609,43 @@ const Hero = () => {
           </motion.div>
         )}
       </div>
+
+      {/* Notice Modal */}
+      <AnimatePresence>
+        {showNotice && (
+          <motion.div
+            className="notice-overlay"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setShowNotice(false)}
+          >
+            <motion.div
+              className="notice-modal"
+              initial={{ opacity: 0, scale: 0.8, y: 50 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.8, y: 50 }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button className="notice-close" onClick={() => setShowNotice(false)}>
+                <X size={24} />
+              </button>
+              <h3>Important Notice</h3>
+              <ul>
+                <li>Inaugural national championship - adults and juniors</li>
+                <li>All players earn points toward national rankings</li>
+                <li>Players must register on MPA website before tournament</li>
+                <li>Juniors: point count towards state selection for Temasya Non-Sukma</li>
+                <li>DUPR: Results not submitted (used only for seeding)</li>
+                <li>Losers pool (Open events only): Knocked-out round robin players get a second chance to compete - prizes to be announced.</li>
+              </ul>
+              <button className="btn btn-primary notice-btn" onClick={() => setShowNotice(false)}>
+                Got it!
+              </button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
