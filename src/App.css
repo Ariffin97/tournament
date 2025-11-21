@@ -1468,8 +1468,11 @@ h2 {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
-    padding-top: 80px;
+    justify-content: space-between;
+    padding-top: 60px;
+    padding-bottom: 20px;
+    height: 100%;
+    box-sizing: border-box;
   }
 
   .hero-logo {
@@ -1492,12 +1495,13 @@ h2 {
   }
 
   .hero-buttons {
-    position: absolute;
-    bottom: 180px;
-    left: 0;
-    right: 0;
+    position: relative;
+    bottom: auto;
+    left: auto;
+    right: auto;
     flex-direction: column;
     align-items: center;
+    margin-top: auto;
   }
 
   .hero-buttons .btn {
@@ -1509,12 +1513,12 @@ h2 {
 
   .sponsors-row {
     gap: 12px;
-    margin-top: auto;
+    margin-top: 15px;
     padding-bottom: 8px;
-    position: absolute;
-    bottom: 40px;
-    left: 0;
-    right: 0;
+    position: relative;
+    bottom: auto;
+    left: auto;
+    right: auto;
     justify-content: center;
   }
 
