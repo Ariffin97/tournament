@@ -1364,11 +1364,6 @@ h2 {
     font-size: 1.2rem;
   }
   
-  .hero-buttons {
-    flex-direction: column;
-    align-items: center;
-  }
-  
   .btn {
     width: 250px;
   }
@@ -1498,9 +1493,11 @@ h2 {
 
   .hero-buttons {
     position: absolute;
-    bottom: 110px;
+    bottom: 180px;
     left: 0;
     right: 0;
+    flex-direction: column;
+    align-items: center;
   }
 
   .hero-buttons .btn {
@@ -1515,7 +1512,7 @@ h2 {
     margin-top: auto;
     padding-bottom: 8px;
     position: absolute;
-    bottom: 10px;
+    bottom: 40px;
     left: 0;
     right: 0;
     justify-content: center;
