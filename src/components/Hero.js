@@ -7,7 +7,33 @@ const Hero = () => {
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
   const [activeCategory, setActiveCategory] = useState('junior');
-  const [showNotice, setShowNotice] = useState(true);
+  const [showNotice, setShowNotice] = useState(false);
+  const [isOldBrowser, setIsOldBrowser] = useState(false);
+
+  // Detect older browsers that may have issues with animations
+  useEffect(() => {
+    const detectOldBrowser = () => {
+      const ua = navigator.userAgent;
+      // Check for older Safari, iOS < 14, Android < 10, or IE
+      const isOldSafari = /Safari/.test(ua) && /Version\/([0-9]+)/.test(ua) &&
+        parseInt(ua.match(/Version\/([0-9]+)/)[1]) < 14;
+      const isOldIOS = /iPhone|iPad/.test(ua) && /OS ([0-9]+)/.test(ua) &&
+        parseInt(ua.match(/OS ([0-9]+)/)[1]) < 14;
+      const isOldAndroid = /Android ([0-9]+)/.test(ua) &&
+        parseInt(ua.match(/Android ([0-9]+)/)[1]) < 10;
+      const isIE = /Trident|MSIE/.test(ua);
+
+      return isOldSafari || isOldIOS || isOldAndroid || isIE;
+    };
+
+    setIsOldBrowser(detectOldBrowser());
+  }, []);
+
+  // Delay modal to prevent flash on initial load
+  useEffect(() => {
+    const timer = setTimeout(() => setShowNotice(true), 1500);
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -37,14 +63,28 @@ const Hero = () => {
     setActiveSection(section);
   };
 
+  // Simplified animation props for older browsers
+  const getAnimationProps = (initialProps, animateProps, transitionProps) => {
+    if (isOldBrowser) {
+      return {}; // No animation for old browsers
+    }
+    return {
+      initial: initialProps,
+      animate: animateProps,
+      transition: transitionProps
+    };
+  };
+
   return (
     <div className="hero">
       {/* Hero Navbar */}
       <motion.nav
         className="hero-navbar"
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.2 }}
+        {...getAnimationProps(
+          { opacity: 0, y: -20 },
+          { opacity: 1, y: 0 },
+          { duration: 0.6, delay: 0.2 }
+        )}
       >
         <a
           href="#"
