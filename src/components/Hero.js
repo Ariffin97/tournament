@@ -8,6 +8,7 @@ const Hero = () => {
   const [activeSection, setActiveSection] = useState('home');
   const [activeCategory, setActiveCategory] = useState('junior');
   const [showNotice, setShowNotice] = useState(false);
+  const [showPricePromo, setShowPricePromo] = useState(true);
   const [isOldBrowser, setIsOldBrowser] = useState(false);
 
   // Detect older browsers that may have issues with animations
@@ -414,14 +415,16 @@ const Hero = () => {
                   </div>
 
                   <div className="registration-fees">
-                    <h3>Registration Fee</h3>
+                    <h3>Registration Fee <span className="fee-promo-tag">REDUCED!</span></h3>
                     <div className="fee-cards">
-                      <div className="fee-card">
-                        <span className="fee-amount">RM180</span>
+                      <div className="fee-card fee-card-promo">
+                        <span className="fee-old-amount">RM180</span>
+                        <span className="fee-amount">RM120</span>
                         <span className="fee-label">Per Player</span>
                       </div>
-                      <div className="fee-card">
-                        <span className="fee-amount">RM360</span>
+                      <div className="fee-card fee-card-promo">
+                        <span className="fee-old-amount">RM360</span>
+                        <span className="fee-amount">RM240</span>
                         <span className="fee-label">Per Team</span>
                       </div>
                     </div>
@@ -451,14 +454,16 @@ const Hero = () => {
                   </div>
 
                   <div className="registration-fees">
-                    <h3>Registration Fee</h3>
+                    <h3>Registration Fee <span className="fee-promo-tag">REDUCED!</span></h3>
                     <div className="fee-cards">
-                      <div className="fee-card">
-                        <span className="fee-amount">RM180</span>
+                      <div className="fee-card fee-card-promo">
+                        <span className="fee-old-amount">RM180</span>
+                        <span className="fee-amount">RM120</span>
                         <span className="fee-label">Per Player</span>
                       </div>
-                      <div className="fee-card">
-                        <span className="fee-amount">RM360</span>
+                      <div className="fee-card fee-card-promo">
+                        <span className="fee-old-amount">RM360</span>
+                        <span className="fee-amount">RM240</span>
                         <span className="fee-label">Per Team</span>
                       </div>
                     </div>
@@ -681,6 +686,62 @@ const Hero = () => {
               <button className="btn btn-primary notice-btn" onClick={() => setShowNotice(false)}>
                 Got it!
               </button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Price Reduction Promo Modal */}
+      <AnimatePresence>
+        {showPricePromo && (
+          <motion.div
+            className="promo-overlay"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setShowPricePromo(false)}
+          >
+            <motion.div
+              className="promo-modal"
+              initial={{ opacity: 0, scale: 0.8, y: 50 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.8, y: 50 }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button className="promo-close" onClick={() => setShowPricePromo(false)}>
+                <X size={24} />
+              </button>
+
+              <div className="promo-badge">
+                <span className="promo-badge-text">PRICE REDUCED!</span>
+              </div>
+
+              <h3>Adult & Senior Categories</h3>
+
+              <div className="promo-prices">
+                <div className="promo-price-item">
+                  <span className="old-price">RM180</span>
+                  <span className="new-price">RM120</span>
+                  <span className="price-label">Per Player</span>
+                </div>
+                <div className="promo-divider"></div>
+                <div className="promo-price-item">
+                  <span className="old-price">RM360</span>
+                  <span className="new-price">RM240</span>
+                  <span className="price-label">Per Team</span>
+                </div>
+              </div>
+
+              <p className="promo-note">Limited time offer for all Adult (19+ & 35+) and Senior (50+) categories!</p>
+
+              <motion.button
+                className="btn btn-primary promo-btn"
+                onClick={() => { setShowPricePromo(false); setActiveSection('register'); }}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                Register Now
+              </motion.button>
             </motion.div>
           </motion.div>
         )}
